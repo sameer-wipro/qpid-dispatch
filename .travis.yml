@@ -64,7 +64,7 @@ jobs:
     dist: focal
     compiler: clang
     before_install:
-    - sudo apt-get install clang-11 llvm-11-dev
+    - sudo apt-get install clang-12 llvm-12-dev
     # https://github.com/pypa/virtualenv/issues/1740
     # https://github.com/pypa/virtualenv/issues/1873
     - python -m pip install --user --upgrade pip
@@ -76,8 +76,8 @@ jobs:
     # Install grpcio and protobuf to run the grpc tests.
     - python -m pip install --user grpcio protobuf
     env:
-    - CC=clang-11
-    - CXX=clang++-11
+    - CC=clang-12
+    - CXX=clang++-12
     - PATH="/usr/bin:$PATH" PROTON_VERSION=main BUILD_TYPE=RelWithDebInfo
     - DISPATCH_CMAKE_ARGS='-DRUNTIME_CHECK=asan -DCMAKE_C_FLAGS=-DQD_MEMORY_DEBUG'
   - name: "qdrouterd:RelWithDebInfo+MemoryDebug (clang on focal)"
@@ -88,7 +88,7 @@ jobs:
     python:
       - "3.9"
     before_install:
-      - sudo apt-get install clang-11 llvm-11-dev
+      - sudo apt-get install clang-12 llvm-12-dev
       # Install and use the latest Node.js LTS version
       - nvm install "lts/*"
       # https://github.com/pypa/virtualenv/issues/1740
@@ -105,8 +105,8 @@ jobs:
       - python3 -m pip install --user protobuf
       - sudo apt install python3-grpcio
     env:
-      - CC=clang-11
-      - CXX=clang++-11
+      - CC=clang-12
+      - CXX=clang++-12
       - PROTON_VERSION=main BUILD_TYPE=RelWithDebInfo
       - DISPATCH_CMAKE_ARGS='-DRUNTIME_CHECK=asan -DCMAKE_C_FLAGS=-DQD_MEMORY_DEBUG -DQD_ENABLE_ASSERTIONS=ON -DDISPATCH_TEST_TIMEOUT=500'
   - name: "qdrouterd:Default Build"
