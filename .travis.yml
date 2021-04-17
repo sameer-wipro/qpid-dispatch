@@ -59,12 +59,12 @@ jobs:
     env:
     - PATH="/usr/bin:$PATH" PROTON_VERSION=0.33.0 BUILD_TYPE=RelWithDebInfo
     - DISPATCH_CMAKE_ARGS='-DRUNTIME_CHECK=asan -DCMAKE_C_FLAGS=-DQD_MEMORY_DEBUG'
-  - name: "qdrouterd:RelWithDebInfo+MemoryDebug (clang on focal)"
+  - name: "qdrouterd:RelWithDebInfo+MemoryDebug (clang-11 on focal)"
     os: linux
     dist: focal
     compiler: clang
     before_install:
-    - sudo apt-get install clang-12 llvm-12-dev
+    - sudo apt-get install clang-11 llvm-11-dev
     # https://github.com/pypa/virtualenv/issues/1740
     # https://github.com/pypa/virtualenv/issues/1873
     - python -m pip install --user --upgrade pip
@@ -76,11 +76,11 @@ jobs:
     # Install grpcio and protobuf to run the grpc tests.
     - python -m pip install --user grpcio protobuf
     env:
-    - CC=clang-12
-    - CXX=clang++-12
+    - CC=clang-11
+    - CXX=clang++-11
     - PATH="/usr/bin:$PATH" PROTON_VERSION=main BUILD_TYPE=RelWithDebInfo
     - DISPATCH_CMAKE_ARGS='-DRUNTIME_CHECK=asan -DCMAKE_C_FLAGS=-DQD_MEMORY_DEBUG'
-  - name: "qdrouterd:RelWithDebInfo+MemoryDebug (clang on focal)"
+  - name: "qdrouterd:RelWithDebInfo+MemoryDebug (clang-12 on focal)"
     arch: arm64
     os: linux
     dist: focal
@@ -88,6 +88,9 @@ jobs:
     python:
       - "3.9"
     before_install:
+      - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key 2>/dev/null | sudo apt-key add -
+      - sudo add-apt-repository 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-12 main' -y
+      - sudo apt-get update -q
       - sudo apt-get install clang-12 llvm-12-dev
       # Install and use the latest Node.js LTS version
       - nvm install "lts/*"
