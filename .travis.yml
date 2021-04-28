@@ -35,6 +35,7 @@ jobs:
       apt:
         packages: 
           - maven
+          - make
     install: []
     before_script: []
     script:
