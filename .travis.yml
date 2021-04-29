@@ -56,7 +56,7 @@ jobs:
     dist: xenial
     before_install:
     - sudo apt-get install npm
-    - npm install -g node-gyp
+    - sudo npm install -g node-gyp
     - sudo apt-get install git
     - sudo apt-get install make
 #    - npm -v
