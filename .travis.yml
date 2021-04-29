@@ -53,7 +53,7 @@ jobs:
   - name: "qdrouterd:Debug"
     os: linux
     arch: s390x
-    dist: groovy
+    dist: xenial
     before_install:
     - sudo apt-get install npm git
     - npm -v
